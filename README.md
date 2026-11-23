@@ -1,4 +1,6 @@
-# Window Organizer
+# Window Organizer Pre-Silicon
+
+An Intel (x86_64) edition of [Window Organizer](https://github.com/gschauz/window-organizer) for macOS 13 and later, including Intel MacBook Pro models running macOS Tahoe. Download **Window-Organizer-Intel.zip** from this repository’s Releases page and double-click it to extract the app.
 
 A native, local-only macOS menu-bar app for saving and restoring the layout of already-open windows. Built with SwiftUI, the macOS Accessibility APIs, and an isolated experimental Spaces bridge. No third-party dependencies.
 
@@ -40,7 +42,7 @@ The app stores layouts in `~/Library/Application Support/WindowOrganizer/presets
 
 Accessibility access is required to inspect and move other applications' windows. The app only requests access when you click **Enable Accessibility**. Screen Recording permission is not required.
 
-The supplied app is built for Apple Silicon and signed locally (ad hoc), not notarized for public distribution. Rebuilding or moving the app can require reauthorizing Accessibility. For shipping to other users, add Developer ID signing and notarization.
+The supplied app is built for Intel Macs and signed locally (ad hoc), not notarized for public distribution. Rebuilding or moving the app can require reauthorizing Accessibility. For shipping to other users, add Developer ID signing and notarization.
 
 ## Build and test
 

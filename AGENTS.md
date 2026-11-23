@@ -6,7 +6,7 @@ This is a native macOS app using SwiftUI, AppKit, Accessibility, and an Objectiv
 
 Use the Mac build GitHub Actions workflow for automated tests and a downloadable app ZIP. Inspect the run for the current commit and resolve failures before declaring validation complete. Never run scripts/update.sh in CI or a cloud coding environment: it is only for an explicitly requested local Mac installation and can change Accessibility approval. Cloud builds use scripts/test.sh and scripts/build.sh with temporary output paths.
 
-Downloads from Actions are temporary test builds, retained for 30 days. Keep approved versions as GitHub Release assets. Builds are Apple Silicon, ad-hoc signed, and not notarized; physical display, Spaces, and Accessibility testing still requires the user's Mac. Do not upload saved layouts, personal window titles, document paths, credentials, or screenshots to the public repository.
+Downloads from Actions are temporary test builds, retained for 30 days. Keep approved versions as GitHub Release assets. Builds are Intel x86_64, ad-hoc signed, and not notarized; physical display, Spaces, and Accessibility testing still requires the user's Mac. Do not upload saved layouts, personal window titles, document paths, credentials, or screenshots to the public repository.
 
 The local instructions below apply only when local development or installation is explicitly requested. Cloud setup, documentation, and workflow changes do not require rebuilding or relaunching the user's installed app.
 
