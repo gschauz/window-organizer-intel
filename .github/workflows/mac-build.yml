@@ -43,7 +43,7 @@ jobs:
           ditto -c -k --sequesterRsrc --keepParent "$WINDOW_ORGANIZER_APP_PATH" "dist/Window-Organizer-Intel.zip"
           ditto -x -k "dist/Window-Organizer-Intel.zip" "$RUNNER_TEMP/verify-download"
           codesign --verify --strict "$RUNNER_TEMP/verify-download/Window Organizer.app"
-          lipo -verify_arch x86_64 "$RUNNER_TEMP/verify-download/Window Organizer.app/Contents/MacOS/WindowOrganizer"
+          lipo "$RUNNER_TEMP/verify-download/Window Organizer.app/Contents/MacOS/WindowOrganizer" -verify_arch x86_64
           cmp "$WINDOW_ORGANIZER_APP_PATH/Contents/MacOS/WindowOrganizer" "$RUNNER_TEMP/verify-download/Window Organizer.app/Contents/MacOS/WindowOrganizer"
       - name: Upload app download
         uses: actions/upload-artifact@v7

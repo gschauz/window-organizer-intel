@@ -10,7 +10,7 @@ export CLANG_MODULE_CACHE_PATH="$BUILD_DIR/clang-cache"
 BUILD_OPTIONS=(--arch x86_64 --package-path "$PROJECT_DIR" --scratch-path "$BUILD_DIR" --cache-path "$BUILD_DIR/cache" --config-path "$BUILD_DIR/config" --security-path "$BUILD_DIR/security" --disable-sandbox)
 swift build -c release "${BUILD_OPTIONS[@]}"
 BIN_DIR="$(swift build -c release "${BUILD_OPTIONS[@]}" --show-bin-path)"
-lipo -verify_arch x86_64 "$BIN_DIR/WindowOrganizer"
+lipo "$BIN_DIR/WindowOrganizer" -verify_arch x86_64
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
 cp "$BIN_DIR/WindowOrganizer" "$APP/Contents/MacOS/WindowOrganizer"
 ditto "$BIN_DIR/WindowOrganizer_WindowOrganizer.bundle" "$APP/Contents/Resources/WindowOrganizer_WindowOrganizer.bundle"
