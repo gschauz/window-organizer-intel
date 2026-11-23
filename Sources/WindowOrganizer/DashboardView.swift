@@ -404,7 +404,7 @@ struct LayoutPreview: View {
     var body: some View {
         GeometryReader { proxy in
             let union = layout.displays.reduce(CGRect.null) { $0.union($1.frame.rect) }
-            let scale = max(0, min((proxy.size.width - 40) / max(1, union.width), (proxy.size.height - 64) / max(1, union.height)))
+            let scale: CGFloat = max(0, min((proxy.size.width - 40) / max(1, union.width), (proxy.size.height - 64) / max(1, union.height)))
             let offsetX = (proxy.size.width - union.width * scale) / 2
             let offsetY = (proxy.size.height - 24 - union.height * scale) / 2
             ZStack(alignment: .topLeading) {
@@ -415,12 +415,17 @@ struct LayoutPreview: View {
                 }
                 ForEach(Array(layout.windows.enumerated()), id: \.element.id) { index, window in
                     let r = window.frame.rect
-                    RoundedRectangle(cornerRadius: 3).fill(colors[index % colors.count].opacity(0.28))
-                        .overlay(RoundedRectangle(cornerRadius: 3).stroke(colors[index % colors.count].opacity(0.6), lineWidth: 1))
+                    let width: CGFloat = max(1, r.width * scale - 2)
+                    let height: CGFloat = max(1, r.height * scale - 2)
+                    let x: CGFloat = offsetX + (r.minX - union.minX) * scale + 1
+                    let y: CGFloat = offsetY + (r.minY - union.minY) * scale + 1
+                    let color = colors[index % colors.count]
+                    RoundedRectangle(cornerRadius: 3).fill(color.opacity(0.28))
+                        .overlay(RoundedRectangle(cornerRadius: 3).stroke(color.opacity(0.6), lineWidth: 1))
                         .overlay(alignment: .topLeading) { Text(window.appName).font(.system(size: 8, weight: .medium)).lineLimit(1).padding(4) }
-                        .frame(width: max(1, r.width * scale - 2), height: max(1, r.height * scale - 2))
+                        .frame(width: width, height: height)
                         .clipShape(RoundedRectangle(cornerRadius: 3))
-                        .offset(x: offsetX + (r.minX - union.minX) * scale + 1, y: offsetY + (r.minY - union.minY) * scale + 1)
+                        .offset(x: x, y: y)
                 }
                 ForEach(layout.displays) { display in
                     Label(display.name, systemImage: display.builtIn ? "laptopcomputer" : "display")

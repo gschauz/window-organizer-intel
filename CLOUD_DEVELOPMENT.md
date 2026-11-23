@@ -4,7 +4,7 @@ GitHub holds the source and its history. Cloud tasks use a remote working copy. 
 
 ## One-time cloud environment setup
 
-In ChatGPT, choose **Work in > Cloud > Select environment > Create environment**, select `gschauz/window-organizer-pre-silicon`, and connect GitHub if prompted. Review the setup, then publish the environment. See the [official cloud setup guide](https://learn.chatgpt.com/docs/cloud).
+In ChatGPT, choose **Work in > Cloud > Select environment > Create environment**, select `gschauz/window-organizer-intel`, and connect GitHub if prompted. Review the setup, then publish the environment. See the [official cloud setup guide](https://learn.chatgpt.com/docs/cloud).
 
 Tell the setup agent that this is a native macOS SwiftUI app with no third-party package dependencies. A Linux workspace is suitable for editing but cannot build Apple frameworks. Use the **Mac build** GitHub Actions workflow for compilation and tests. Do not run `scripts/update.sh` in the cloud.
 

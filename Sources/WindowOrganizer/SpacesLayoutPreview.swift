@@ -80,7 +80,7 @@ private struct DesktopCanvas: View {
     var isSelected = false
     var body: some View {
         GeometryReader { proxy in
-            let scale = min(proxy.size.width / max(1, display.frame.width), proxy.size.height / max(1, display.frame.height))
+            let scale: CGFloat = min(proxy.size.width / max(1, display.frame.width), proxy.size.height / max(1, display.frame.height))
             let screenWidth = max(1, display.frame.width) * scale
             let screenHeight = max(1, display.frame.height) * scale
             let cornerRadius: CGFloat = showsTitles ? 6 : 3
@@ -88,6 +88,10 @@ private struct DesktopCanvas: View {
                 ForEach(Array(windows.enumerated()), id: \.element.id) { index, window in
                     let rect = window.frame.rect.intersection(display.frame.rect)
                     if !rect.isNull && !rect.isEmpty {
+                        let width: CGFloat = max(1, rect.width * scale - 1)
+                        let height: CGFloat = max(1, rect.height * scale - 1)
+                        let x: CGFloat = (rect.minX - display.frame.rect.minX) * scale
+                        let y: CGFloat = (rect.minY - display.frame.rect.minY) * scale
                         RoundedRectangle(cornerRadius: showsTitles ? 2 : 1)
                             .fill(Color(white: 0.45 + Double(index % 4) * 0.1).opacity(0.55))
                             .overlay(RoundedRectangle(cornerRadius: 2).stroke(Theme.text.opacity(0.25), lineWidth: 0.5))
@@ -97,10 +101,9 @@ private struct DesktopCanvas: View {
                                         .lineLimit(1).padding(3)
                                 }
                             }
-                            .frame(width: max(1, rect.width * scale - 1), height: max(1, rect.height * scale - 1))
+                            .frame(width: width, height: height)
                             .clipped()
-                            .offset(x: (rect.minX - display.frame.x) * scale,
-                                    y: (rect.minY - display.frame.y) * scale)
+                            .offset(x: x, y: y)
                     }
                 }
             }
